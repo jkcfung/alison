@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alison Fung - College Application Portfolio</title>
+    <meta name="description" content="Alison Fung's college application portfolio featuring awards, leadership, research, podcast work, and service.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,6 +13,7 @@
             <div class="logo">
                 <h1>Alison Fung</h1>
             </div>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#awards">Awards</a></li>
@@ -35,7 +37,7 @@
                 <p>Illinois Mathematics and Science Academy Student</p>
                 <p>Passionate about engineering, music, and empowering underserved communities</p>
                 <div class="hero-contact">
-                    <p>📧 alisonfung2009@gmail.com</p>
+                    <p><a href="mailto:alisonfung2009@gmail.com">📧 alisonfung2009@gmail.com</a></p>
                     <p>📍 Northbrook, IL</p>
                 </div>
             </div>
@@ -126,7 +128,7 @@
                         <p class="duration"> 2021 - Present</p>
                         <p>Delivering STEAM resource access to underserved communities.</p>
                     </div>
-                    
+
                     <div class="activity">
                         <h3>IMSA LEAD IMPACT</h3>
                         <p class="role">Program Chair</p>
@@ -192,7 +194,6 @@
                         <p class="research-affiliation">Harvard University</p>
                         <p>Working under the mentorship of Professor Sujata Bhatia to conduct research on adverse events of total knee anthroplasty.</p>
                     </div>
-                    
                     
                 </div>
                 
@@ -452,7 +453,7 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <h3>Email</h3>
-                        <p>alisonfung2009@gmail.com</p>
+                        <p><a href="mailto:alisonfung2009@gmail.com">alisonfung2009@gmail.com</a></p>
                     </div>
                 </div>
             </div>
@@ -467,14 +468,14 @@
 
     <!-- Chatbot -->
     <div id="chatbot-container">
-        <div id="chatbot-toggle">
+        <div id="chatbot-toggle" aria-label="Open chatbot" role="button" tabindex="0">
             <div class="chat-icon">💬</div>
             <div class="chat-text">Ask about Alison</div>
         </div>
         
         <div id="chatbot-window" class="hidden">
             <div class="chatbot-header">
-                <h3>Ask About Alison</h3>
+                <div><h3>Ask About Alison</h3><p class="chatbot-subtitle">Quick questions about awards, research, and activities</p></div>
                 <button id="chatbot-close">&times;</button>
             </div>
             
@@ -765,6 +766,28 @@
                     link.classList.add('active');
                 }
             });
+        });
+    
+        // Mobile nav toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('nav-open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            menuToggle.textContent = isOpen ? '✕' : '☰';
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('nav-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.textContent = '☰';
+            });
+        });
+        chatbotToggle.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                chatbotWindow.classList.toggle('hidden');
+            }
         });
     </script>
 </body>
